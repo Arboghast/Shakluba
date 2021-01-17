@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'custom_icons.dart';
 
 class NavBar extends StatelessWidget {
 
@@ -19,11 +20,11 @@ class Header extends StatelessWidget {
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.comment),
+            icon: Icon(CustomIcons.add),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: Icon(CustomIcons.bread),
             onPressed: () {},
           ),
         ],
