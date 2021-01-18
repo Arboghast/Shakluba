@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'custom_icons.dart';
+import 'dart:math';
 
 class NavBar extends StatelessWidget {
 
@@ -13,18 +14,26 @@ class NavBar extends StatelessWidget {
 }
 
 class Header extends StatefulWidget {
-
   @override
   _HeaderState createState() => new _HeaderState();
 }
 
 class _HeaderState extends State<Header> {
-  int target;
+  int target = 2;
+  int previous = 2;
+  PageController controller = PageController(initialPage: 2);
 
   void tabAnimation(int target) {
-    setState(() => this.target = target);
+    setState(() {
+      this.controller.animateToPage(target - 1, duration: new Duration(milliseconds: 500) , curve: Curves.easeOutSine);
+      //this.controller.jumpToPage(target-1);
+      this.previous = this.target;
+      this.target = target;
+    });
   }
+
   
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -57,32 +66,51 @@ class _HeaderState extends State<Header> {
         ),
         elevation: 1,
         backgroundColor: Color.fromRGBO(25,25,25,1),
-        //backgroundColor: Colors.blue,
       ),
-      body: ActiveTab(this.target), backgroundColor:Colors.white, 
+      body: Stack(
+        children: <Widget> [
+          PageView(
+            controller: controller,
+            children: <Widget>[
+              Container(
+                color:Colors.pink,
+              ),
+              Container(
+                color:Colors.green,
+              ),
+              Container(
+                color:Colors.cyan,
+              ),
+              Container(
+                color:Colors.purple,
+              ),
+            ],
+          ),
+          ActiveTab(this.target,this.previous),
+        ], 
+      ),
+      backgroundColor:Colors.white,
     );
   }
 }
 
 class ActiveTab extends StatelessWidget {
-  List<double> targets = [50,180,350,480];
-  ActiveTab(int target)
+  final List<double> normalized = [-0.805,-0.325,0.165,0.635];
+  Alignment currLoc = Alignment.topCenter;
+  double distance = 0;
+  ActiveTab(int target, int previous)
   {
-    print(target);
-     AnimatedAlign(
-        alignment: new Alignment(0, 50),
-        child: Icon(CustomIcons.triangle, color: Color.fromRGBO(0,0,0,1), size: 20, ),
-        curve: Curves.elasticOut,
-        duration: Duration(milliseconds: 300),
-    );
+    distance = (target - previous).toDouble();
+    distance = distance < 0 ? -1*distance : distance;
+    currLoc = new Alignment(normalized[target-1], -1);
   }
 
   Widget build(BuildContext context){
     return AnimatedAlign(
-        alignment: Alignment.topCenter,
-        child: Icon(CustomIcons.triangle, color: Color.fromRGBO(0,0,0,1), size: 20, ),
+        alignment: currLoc,
+        child: Icon(CustomIcons.triangle, color: Color.fromRGBO(25,25,25,1), size: 20),
         curve: Curves.elasticOut,
-        duration: Duration(milliseconds: 300),
+        duration: Duration(milliseconds: ((800 * log(distance+1.25)) + 400).round()),
     );
   }
 }
