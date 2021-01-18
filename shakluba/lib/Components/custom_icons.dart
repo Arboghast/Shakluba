@@ -21,25 +21,20 @@ class CustomIcons {
   static const _kFontFam = 'CustomIcons';
   static const _kFontPkg = null;
 
-  static const IconData widearrowdown = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData triangle = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData uncheckedbox = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData add = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData arrow = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData bread = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData camera = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData checkedbox = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData chefhat = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData clock = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData clockicon = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData emptyheart = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData exclusions = IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData fancysearch = IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData favorite = IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData filter = IconData(0xe80e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData grocery = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData harvest = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heartempty = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData leftarrowwide = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData leftarrow = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heartfilled = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData meat = IconData(0xe814, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData minuscircle = IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -50,5 +45,6 @@ class CustomIcons {
   static const IconData star = IconData(0xe81a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData swap = IconData(0xe81b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData transfat = IconData(0xe81c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData xmlid_1220 = IconData(0xe81d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chefhat = IconData(0xe824, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData medal = IconData(0xe825, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
