@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'custom_icons.dart';
 import 'dart:math';
+import 'mainpage.dart';
 
 class NavBar extends StatelessWidget {
 
@@ -73,9 +74,7 @@ class _HeaderState extends State<Header> {
             controller: controller,
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
-              Container(
-                color:Colors.pink,
-              ),
+              MainCard(),
               Container(
                 color:Colors.green,
               ),
