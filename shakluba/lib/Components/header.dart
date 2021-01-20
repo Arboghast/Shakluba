@@ -71,6 +71,7 @@ class _HeaderState extends State<Header> {
         children: <Widget> [
           PageView(
             controller: controller,
+            physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               Container(
                 color:Colors.pink,
