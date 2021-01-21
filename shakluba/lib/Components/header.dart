@@ -74,10 +74,10 @@ class _HeaderState extends State<Header> {
             controller: controller,
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
-              MainCard(),
               Container(
                 color:Colors.green,
               ),
+              MainCard(),
               Container(
                 color:Colors.cyan,
               ),
