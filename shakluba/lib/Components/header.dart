@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'custom_icons.dart';
 import 'dart:math';
 import 'mainpage.dart';
+import 'ingredients.dart';
 
 class NavBar extends StatelessWidget {
 
@@ -22,7 +23,7 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   int target = 2;
   int previous = 2;
-  PageController controller = PageController(initialPage: 2);
+  PageController controller = PageController(initialPage: 1);
 
   void tabAnimation(int target) {
     setState(() {
@@ -78,9 +79,7 @@ class _HeaderState extends State<Header> {
                 color:Colors.green,
               ),
               MainCard(),
-              Container(
-                color:Colors.cyan,
-              ),
+              FoodLists(),
               Container(
                 color:Colors.purple,
               ),
