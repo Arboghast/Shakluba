@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'custom_icons.dart';
 import 'dart:math';
@@ -45,31 +46,49 @@ class _MainCardState extends State<MainCard>{
     return Scaffold(
         floatingActionButton: FilterButton(_filterController),
         floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
-        body: SlidingUpPanel(
-          isDraggable: false,
-          controller: _filterController,
-          backdropEnabled: true,
-          renderPanelSheet: false,
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          collapsed: Container(child: Text("Currently collapsed"), color: Color.fromRGBO(13, 13, 13, 0.5)),      //Gradient should go here
-          panel: Container(child: Text("The filters go here"), color: Color.fromRGBO(13, 13, 13, 0.0)),
-          body: CustomScrollView(
-            slivers: <Widget>[ 
-              SliverAppBar(
-                floating: true,
-                pinned: true,
-                snap: true,
-                expandedHeight: 500.0,
-                flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin,
-                    background: ImageCard('images/8.png', 4.6, true),
-                ),
-              ),
-              RecipeCard(),
-            ],
-          )
-         ),
+        body: PageView(
+          pageSnapping: true,
+          scrollDirection: Axis.horizontal,
+          children: [
+            SwipeCard(_filterController, 'images/9.png'),
+            SwipeCard(_filterController, 'images/10.png')
+          ],
+        )
       );
+  }
+}
+
+class SwipeCard extends StatelessWidget{
+  PanelController fc = PanelController();
+  String img;
+  SwipeCard(this.fc, this.img);
+
+  @override
+  Widget build(BuildContext context){
+    return SlidingUpPanel(
+      isDraggable: false,
+      controller: fc,
+      backdropEnabled: true,
+      renderPanelSheet: false,
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      collapsed: Container(child: Text("Currently collapsed"), color: Color.fromRGBO(13, 13, 13, 0.5)),      //Gradient should go here
+      panel: Container(child: Text("The filters go here"), color: Color.fromRGBO(13, 13, 13, 0.0)),
+      body: CustomScrollView(
+        slivers: <Widget>[ 
+          SliverAppBar(
+            floating: true,
+            pinned: true,
+            snap: true,
+            expandedHeight: 500.0,
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+                background: ImageCard(img, 4.6, true),
+            ),
+          ),
+          RecipeCard(),   //not dynamic as of yet
+        ],
+      )
+    );
   }
 }
 

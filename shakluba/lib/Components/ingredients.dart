@@ -241,10 +241,6 @@ class Blacklist extends StatelessWidget{
 
 class Substitutes extends StatelessWidget{
 
-  _openSwapMenu(){
-    
-  }
-
   @override
   Widget build(BuildContext context){
     return Positioned(
@@ -260,9 +256,24 @@ class Substitutes extends StatelessWidget{
         child: IconButton(
           iconSize: 30,
           icon: Icon(CustomIcons.swap),
-          onPressed: ()=> print("ok"),
-        )
-      ),
+          onPressed: ()=>{
+            showDialog(
+              context: context,
+              builder: (_) => PopUp(),
+            )
+          }
+        ),
+      )
+    );
+  }
+}
+
+class PopUp extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context){
+    return AlertDialog(
+      title: Text("we'll substitute x with x and y"),
     );
   }
 }
