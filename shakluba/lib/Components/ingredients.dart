@@ -29,18 +29,17 @@ const MockIngredients = [
 ];
 
 class FoodLists extends StatefulWidget{
+  final PageController pc = PageController();
+  final PanelController fc = PanelController();
 
   @override
   _FoodListsState createState() => _FoodListsState();
 }
 
 class _FoodListsState extends State<FoodLists>{
-  PageController pc = new PageController();
-  PanelController fc = new PanelController();
   bool toggle = true;
 
   _pageChanged(int page){
-    //print(toggle);
     setState(() {
         toggle = !toggle;
     });
@@ -49,7 +48,7 @@ class _FoodListsState extends State<FoodLists>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      floatingActionButton: ActionButton(pc,toggle,fc),
+      floatingActionButton: ActionButton(widget.pc, toggle, widget.fc),
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       appBar: AppBar(
         centerTitle: true,
@@ -59,7 +58,7 @@ class _FoodListsState extends State<FoodLists>{
       ),
       body: SlidingUpPanel(
           isDraggable: false,
-          controller: fc,
+          controller: widget.fc,
           backdropEnabled: true,
           renderPanelSheet: false,
           margin: EdgeInsets.symmetric(horizontal: 20),
@@ -68,11 +67,11 @@ class _FoodListsState extends State<FoodLists>{
           body: PageView(
             onPageChanged: _pageChanged,
             pageSnapping: true,
-            controller: pc,
+            controller: widget.pc,
             // physics: NeverScrollableScrollPhysics(),
             children: [
-              Ingredients(),
-              Blacklist(),
+              Ingredients(MockIngredients),
+              Blacklist(MockIngredients.where((element) => !element.contains("p")).toList()),
             ],
           ),
       ),
@@ -97,7 +96,6 @@ class ActionButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){ 
-    print(this.toggle);
     if(toggle) {
       return Container(
         width: 64.0,
@@ -129,9 +127,13 @@ class ActionButton extends StatelessWidget{
 }
 
 class SearchBar extends StatelessWidget{
-  String type;
-  SearchBar(bool toggle){
-    type = toggle ? "ingredients" : "exclusions";
+  final String type;
+
+  SearchBar._(this.type);
+
+  factory SearchBar(bool toggle){
+    var type = toggle ? "ingredients" : "exclusions";
+    return SearchBar._(type);
   }
 
   @override
@@ -152,13 +154,17 @@ class SearchBar extends StatelessWidget{
 }
 
 class Ingredients extends StatelessWidget{
-  List<Widget> ingredients = [];
+  final List<Widget> ingredients;
 
-  Ingredients(){
-    for(int i = 0; i < MockIngredients.length; i++){
-      Dismissible widget = Dismissible(key: UniqueKey(), child: Text(MockIngredients[i]));
-      ingredients.add(widget);
+  Ingredients._(this.ingredients);
+
+  factory Ingredients(List<String> ingredients){
+    List<Widget> widgets = []; 
+    for(int i = 0; i < ingredients.length; i++){
+      Dismissible widget = Dismissible(key: UniqueKey(), child: Text(ingredients[i]));
+      widgets.add(widget);
     }
+    return Ingredients._(widgets);
   }
 
   @override
@@ -180,9 +186,13 @@ class Ingredients extends StatelessWidget{
 }
 
 class AddBar extends StatelessWidget{
-  String type;
-  AddBar(bool toggle){
-    type = toggle ? "ingredients" : "exclusions";
+  final String type;
+
+  AddBar._(this.type);
+
+  factory AddBar(bool toggle){
+    var type = toggle ? "ingredients" : "exclusions";
+    return AddBar._(type);
   }
 
   @override
@@ -207,17 +217,21 @@ class AddBar extends StatelessWidget{
 }
 
 class Blacklist extends StatelessWidget{
-  List<Widget> blacklist = [];
+  final List<Widget> blacklist;
 
-  Blacklist(){
+  Blacklist._(this.blacklist);
+
+  factory Blacklist(List<String> exclusions){
+    List<Widget> widgets = [];
     for(int i = MockIngredients.length-1 ; i >= 0 ; i--){
       Dismissible widget = Dismissible(
         key: UniqueKey(),
         direction: DismissDirection.horizontal,
         child: Text(MockIngredients[i]),
         );
-      blacklist.add(widget);
+      widgets.add(widget);
     }
+    return Blacklist._(widgets);
   }
 
   @override
