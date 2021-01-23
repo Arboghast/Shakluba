@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart'; 
 import 'custom_icons.dart';
 import 'dart:math';
 
@@ -33,62 +34,70 @@ const MockRecipes = [
   "fried chicken"
 ];
 
+const MockImages = [
+  "images/1.png",
+  "images/2.png",
+  "images/3.png",
+  "images/4.png",
+  "images/5.png",
+  "images/6.png",
+  "images/7.png",
+  "images/8.png",
+  "images/9.png",
+];
+
 class MainCard extends StatefulWidget{
+  // Stateless members go here
+  final PanelController filterController = PanelController();
+
   @override
-  _MainCardState createState() => new _MainCardState();
+  _MainCardState createState() => _MainCardState();
 }
 
 class _MainCardState extends State<MainCard>{
-  PanelController _filterController = PanelController();
+  //stateful members go here
+  List<Widget> recipes = [];
+  int previousPage = 0;
+  PageController pageController = PageController(initialPage: 0);
+
+  @override
+  initState(){
+    super.initState();
+    recipes.add(SwipeCard(widget.filterController, MockImages[0], MockIngredients, MockInstructions, MockRecipes));
+    recipes.add(SwipeCard(widget.filterController, MockImages[1], MockIngredients, MockInstructions, MockRecipes));
+  }
+
+  _updateList(int page){
+    if(previousPage >= 0 && previousPage >= page){ //left swipe
+      setState(() {
+
+      });
+    } else { //right swipe
+      setState(() {
+        previousPage = page;
+        if(recipes.length <= page+2){
+          recipes.add(SwipeCard(widget.filterController, MockImages[page+1], MockIngredients, MockInstructions, MockRecipes));
+        }
+      });
+    }
+    
+  }
   
- @override
+  @override
   Widget build(BuildContext context){
     return Scaffold(
-        floatingActionButton: FilterButton(_filterController),
+        floatingActionButton: FilterButton(widget.filterController),
         floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
         body: PageView(
           pageSnapping: true,
           scrollDirection: Axis.horizontal,
+          onPageChanged: _updateList,
+          controller: pageController,
           children: [
-            SwipeCard(_filterController, 'images/9.png'),
-            SwipeCard(_filterController, 'images/10.png')
+            ...recipes,
           ],
         )
       );
-  }
-}
-
-class SwipeCard extends StatelessWidget{
-  PanelController fc = PanelController();
-  String img;
-  SwipeCard(this.fc, this.img);
-
-  @override
-  Widget build(BuildContext context){
-    return SlidingUpPanel(
-      isDraggable: false,
-      controller: fc,
-      backdropEnabled: true,
-      renderPanelSheet: false,
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      collapsed: Container(child: Text("Currently collapsed"), color: Color.fromRGBO(13, 13, 13, 0.5)),      //Gradient should go here
-      panel: Container(child: Text("The filters go here"), color: Color.fromRGBO(13, 13, 13, 0.0)),
-      body: CustomScrollView(
-        slivers: <Widget>[ 
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            snap: true,
-            expandedHeight: 500.0,
-            flexibleSpace: FlexibleSpaceBar(
-              collapseMode: CollapseMode.parallax,
-                background: ImageCard(img, 4.6, true),
-            ),
-          ),
-          RecipeCard(),   //not dynamic as of yet
-        ],
-      )
-    );
   }
 }
 
@@ -122,31 +131,64 @@ class FilterButton extends StatelessWidget {
   }
 }
 
+class SwipeCard extends StatelessWidget{
+  final PanelController fc;
+  final String img;
+  final List<String> ing;
+  final List<String> inst;
+  final List<String> alt;
+  SwipeCard(this.fc, this.img, this.ing, this.inst, this.alt);
+
+  @override
+  Widget build(BuildContext context){
+    return SlidingUpPanel(
+      isDraggable: false,
+      controller: fc,
+      backdropEnabled: true,
+      renderPanelSheet: false,
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      collapsed: Container(child: Text("Currently collapsed"), color: Color.fromRGBO(13, 13, 13, 0.5)),      //Gradient should go here
+      panel: Container(child: Text("The filters go here"), color: Color.fromRGBO(13, 13, 13, 0.0)),
+      body: CustomScrollView(
+        slivers: <Widget>[ 
+          SliverAppBar(
+            floating: true,
+            pinned: true,
+            snap: true,
+            expandedHeight: 500.0,
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+                background: ImageCard(img, 4.6, true),
+            ),
+          ),
+          RecipeCard(ing,inst,alt),   //not dynamic as of yet
+        ],
+      )
+    );
+  }
+}
+
 class ImageCard extends StatelessWidget{
   final String img;
   final double rating;
   final bool fav;
-  IconData favorite;
-  ImageCard(this.img, this.rating, this.fav){
-    this.favorite =  this.fav ? CustomIcons.heartfilled : CustomIcons.heartempty;
-  }
+  final IconData favorite;
+  ImageCard(this.img, this.rating, this.fav):
+          favorite =  fav ? CustomIcons.heartfilled : CustomIcons.heartempty;
 
   @override
   Widget build(BuildContext context){
     return Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.asset(this.img, fit: BoxFit.cover),
+          Image.asset(img, fit: BoxFit.cover),
           Icon(CustomIcons.save),
           Icon(favorite),
-          Row(
-            children: <Widget>[
-              Icon(CustomIcons.star),
-              Icon(CustomIcons.star),
-              Icon(CustomIcons.star),
-              Icon(CustomIcons.star),
-              Icon(CustomIcons.star),
-            ],
+          SmoothStarRating(
+            starCount: 5,
+            isReadOnly: true,
+            rating: this.rating,
+            allowHalfRating: true,
           ),
         ],
       );
@@ -154,24 +196,30 @@ class ImageCard extends StatelessWidget{
 }
 
 class RecipeCard extends StatelessWidget{
-  List<Widget> ingredients = [];
-  List<Widget> instructions = [];
-  List<Widget> recipes = [];
+  final List<Widget> ingredients;
+  final List<Widget> instructions;
+  final List<Widget> recipes;
 
-  RecipeCard(){
+  //https://stackoverflow.com/questions/42864913/how-do-i-initialize-a-final-class-property-in-a-constructor
+  RecipeCard._(this.ingredients, this.instructions, this.recipes);
+
+  factory RecipeCard(List<String> ing, List<String> inst, List<String> alt){
+    List<Widget> x = [];
+    List<Widget> y = [];
+    List<Widget> z = [];
     Random random = new Random();
-    for(int i = 0; i < MockIngredients.length; i++){
+    for(int i = 0; i < ing.length; i++){
       bool checked = random.nextInt(100) > 50;
-      ingredients.add( Ingredient(checked, MockIngredients[i]));
+      x.add( Ingredient(checked, ing[i]));
     }
-    for(int i = 0; i < MockInstructions.length; i++){
-      instructions.add( Text(MockInstructions[i]));
+    for(int i = 0; i < inst.length; i++){
+      y.add( Text(inst[i]));
     }
-    for(int i = 0; i < MockRecipes.length; i++){
-      recipes.add( AltRecipe('images/${i+1}.png', MockRecipes[i]));
+    for(int i = 0; i < alt.length; i++){
+      z.add( AltRecipe('images/${i+1}.png', alt[i]));
     }
+    return RecipeCard._(x,y,z);
   }
-
 
   @override
   Widget build(BuildContext context){
@@ -188,11 +236,10 @@ class RecipeCard extends StatelessWidget{
 }
 
 class Ingredient extends StatelessWidget{
-  IconData checkbox;
-  String name;
-  Ingredient(bool isChecked, this.name){
-    checkbox = isChecked ? CustomIcons.uncheckedbox : CustomIcons.checkedbox;
-  }
+  final IconData checkbox;
+  final String name;
+  Ingredient(bool isChecked, this.name):
+          checkbox = isChecked ? CustomIcons.uncheckedbox : CustomIcons.checkedbox;
 
   @override
   Widget build(BuildContext context){
@@ -208,9 +255,8 @@ class Ingredient extends StatelessWidget{
 }
 
 class AltRecipe extends StatelessWidget{
-  String img;
-  String name;
-  
+  final String img;
+  final String name;
   AltRecipe(this.img, this.name);
 
   @override

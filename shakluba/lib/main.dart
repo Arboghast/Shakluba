@@ -4,5 +4,3 @@ import 'Components/header.dart';
 void main() {
   runApp(NavBar());
 }
-
-

@@ -27,14 +27,12 @@ class _HeaderState extends State<Header> {
 
   void tabAnimation(int target) {
     setState(() {
-      this.controller.animateToPage(target - 1, duration: new Duration(milliseconds: 500) , curve: Curves.easeOutSine);
-      //this.controller.jumpToPage(target-1);
-      this.previous = this.target;
-      this.target = target;
+      controller.animateToPage(target - 1, duration: new Duration(milliseconds: 500) , curve: Curves.easeOutSine);
+      //controller.jumpToPage(target-1);
+      previous = target;
+      target = target;
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context){
@@ -94,14 +92,17 @@ class _HeaderState extends State<Header> {
 }
 
 class ActiveTab extends StatelessWidget {
-  final List<double> normalized = [-0.805,-0.325,0.165,0.635];
-  Alignment currLoc = Alignment.topCenter;
-  double distance = 0;
-  ActiveTab(int target, int previous)
-  {
-    distance = (target - previous).toDouble();
+  final Alignment currLoc;
+  final int duration;
+  ActiveTab._(this.duration, this.currLoc);
+
+  factory ActiveTab(int target, int previous){
+    final List<double> normalized = [-0.805,-0.325,0.165,0.635];
+    double distance = (target - previous).toDouble();
     distance = distance < 0 ? -1*distance : distance;
-    currLoc = new Alignment(normalized[target-1], -1);
+    int duration = ((800 * log(distance+1.25)) + 400).round();
+    Alignment currLoc = new Alignment(normalized[target-1], -1);
+    return ActiveTab._(duration, currLoc);
   }
 
   Widget build(BuildContext context){
@@ -109,7 +110,7 @@ class ActiveTab extends StatelessWidget {
         alignment: currLoc,
         child: Icon(CustomIcons.triangle, color: Color.fromRGBO(25,25,25,1), size: 20),
         curve: Curves.elasticOut,
-        duration: Duration(milliseconds: ((800 * log(distance+1.25)) + 400).round()),
+        duration: Duration(milliseconds: duration),
     );
   }
 }
