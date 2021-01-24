@@ -3,6 +3,8 @@ import 'custom_icons.dart';
 import 'dart:math';
 import 'mainpage.dart';
 import 'ingredients.dart';
+import 'favorites.dart';
+import 'search.dart';
 
 class NavBar extends StatelessWidget {
 
@@ -16,6 +18,8 @@ class NavBar extends StatelessWidget {
 }
 
 class Header extends StatefulWidget {
+  final PageController controller = PageController(initialPage: 1);
+
   @override
   _HeaderState createState() => new _HeaderState();
 }
@@ -23,12 +27,11 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   int target = 2;
   int previous = 2;
-  PageController controller = PageController(initialPage: 1);
 
   void tabAnimation(int target) {
     setState(() {
-      controller.animateToPage(target - 1, duration: new Duration(milliseconds: 500) , curve: Curves.easeOutSine);
-      //controller.jumpToPage(target-1);
+      widget.controller.animateToPage(target - 1, duration: new Duration(milliseconds: 500) , curve: Curves.easeOutSine);
+      //widget.controller.jumpToPage(target-1);
       previous = target;
       target = target;
     });
@@ -70,17 +73,13 @@ class _HeaderState extends State<Header> {
       body: Stack(
         children: <Widget> [
           PageView(
-            controller: controller,
+            controller: widget.controller,
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
-              Container(
-                color:Colors.green,
-              ),
+              Search(),
               MainCard(),
               FoodLists(),
-              Container(
-                color:Colors.purple,
-              ),
+              Favorites(),
             ],
           ),
           ActiveTab(this.target,this.previous),
