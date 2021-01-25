@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   sliding_up_panel: ^1.0.2
   smooth_star_rating: 1.1.1
+  swipedetector: 1.2.0
 
 dev_dependencies:
   flutter_test:

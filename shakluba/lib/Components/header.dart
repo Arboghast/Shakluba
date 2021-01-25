@@ -25,15 +25,15 @@ class Header extends StatefulWidget {
 }
 
 class _HeaderState extends State<Header> {
-  int target = 2;
+  int curr = 2;
   int previous = 2;
 
   void tabAnimation(int target) {
     setState(() {
-      widget.controller.animateToPage(target - 1, duration: new Duration(milliseconds: 500) , curve: Curves.easeOutSine);
-      //widget.controller.jumpToPage(target-1);
-      previous = target;
-      target = target;
+      //widget.controller.animateToPage(target - 1, duration: new Duration(milliseconds: 500) , curve: Curves.easeOutSine);
+      widget.controller.jumpToPage(target-1);
+      previous = curr;
+      curr = target;
     });
   }
 
@@ -82,7 +82,7 @@ class _HeaderState extends State<Header> {
               Favorites(),
             ],
           ),
-          ActiveTab(this.target,this.previous),
+          ActiveTab(this.curr,this.previous),
         ], 
       ),
       backgroundColor:Colors.white,
@@ -101,6 +101,7 @@ class ActiveTab extends StatelessWidget {
     distance = distance < 0 ? -1*distance : distance;
     int duration = ((800 * log(distance+1.25)) + 400).round();
     Alignment currLoc = new Alignment(normalized[target-1], -1);
+    print("$duration and $distance and $currLoc");
     return ActiveTab._(duration, currLoc);
   }
 

@@ -284,10 +284,57 @@ class Substitutes extends StatelessWidget{
 
 class PopUp extends StatelessWidget{
 
+  _add(){
+    print("hit");
+  }
+
   @override
   Widget build(BuildContext context){
     return AlertDialog(
-      title: Text("we'll substitute x with x and y"),
+      title: Text("we'll substitute"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          QuantRow("Sugar", 1),
+          Text("With:"),
+          QuantRow("Black Beans", 2),
+          QuantRow("Maga Beans", 3)
+        ],
+      ),
+      actions: [
+        GestureDetector(
+          onTap: _add,
+          child: Container(
+            child: Row(
+              children: [
+                Text("Add ingredients"),
+                Icon(CustomIcons.pluscircle),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class QuantRow extends StatelessWidget{
+  final int n;
+  final String ing;
+
+  QuantRow(this.ing, this.n);
+
+  @override
+  Widget build(BuildContext context){
+    return Row(
+      children: [
+        Container(
+          child: Text("$n"),
+        ),
+        Container(
+          child: Text("$ing"),
+        )
+      ],
     );
   }
 }

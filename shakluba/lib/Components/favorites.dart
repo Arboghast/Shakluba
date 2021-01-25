@@ -33,6 +33,7 @@ class _FavoriteState extends State<Favorites>{
   void _unfavorite(String title){
     setState(() {
       MockFavorites.removeWhere((element) => element == title);
+      pages = [RecipeList(MockFavorites, _unfavorite, _onPress)]; //the Recipe List is no longer updated when setState is called because it lives in the state
     });
   }
 
@@ -108,12 +109,17 @@ class RecipeCard extends StatelessWidget{
 
   _unfav(){
     callback(title);
+    print("hit");
+  }
+
+  _recip(){
+    onPress(title);
   }
 
   @override
   Widget build(BuildContext context){
     return GestureDetector(
-      onTap: onPress(title),
+      onTap: _recip,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),

@@ -48,7 +48,6 @@ const MockImages = [
 
 class MainCard extends StatefulWidget{
   // Stateless members go here
-  final PanelController filterController = PanelController();
 
   @override
   _MainCardState createState() => _MainCardState();
@@ -59,12 +58,13 @@ class _MainCardState extends State<MainCard>{
   List<Widget> recipes = [];
   int previousPage = 0;
   PageController pageController = PageController(initialPage: 0);
+  static PanelController filterController = PanelController();
 
   @override
   initState(){
     super.initState();
-    recipes.add(SwipeCard(widget.filterController, MockImages[0], MockIngredients, MockInstructions, MockRecipes));
-    recipes.add(SwipeCard(widget.filterController, MockImages[1], MockIngredients, MockInstructions, MockRecipes));
+    recipes.add(SwipeCard(filterController, MockImages[0], MockIngredients, MockInstructions, MockRecipes));
+    recipes.add(SwipeCard(filterController, MockImages[1], MockIngredients, MockInstructions, MockRecipes));
   }
 
   _updateList(int page){
@@ -76,7 +76,7 @@ class _MainCardState extends State<MainCard>{
       setState(() {
         previousPage = page;
         if(recipes.length <= page+2){
-          recipes.add(SwipeCard(widget.filterController, MockImages[page+1], MockIngredients, MockInstructions, MockRecipes));
+          recipes.add(SwipeCard(filterController, MockImages[page+1], MockIngredients, MockInstructions, MockRecipes));
         }
       });
     }
@@ -86,7 +86,7 @@ class _MainCardState extends State<MainCard>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-        floatingActionButton: FilterButton(widget.filterController),
+        floatingActionButton: FilterButton(filterController),
         floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
         body: PageView(
           pageSnapping: true,
