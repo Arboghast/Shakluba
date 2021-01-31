@@ -85,7 +85,7 @@ class _HeaderState extends State<Header> {
           ActiveTab(this.curr,this.previous),
         ], 
       ),
-      backgroundColor:Colors.white,
+      backgroundColor:Color.fromARGB(1, 25, 25, 25),
     );
   }
 }

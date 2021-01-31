@@ -1,0 +1,124 @@
+Index: shakluba/lib/Components/header.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import 'package:flutter/material.dart';\r\n\r\nclass NavBar extends StatelessWidget {\r\n\r\n  @override\r\n  Widget build(BuildContext context){\r\n    return MaterialApp(\r\n      title: 'Shakluba',\r\n      home: Header(),\r\n    );\r\n  }\r\n}\r\n\r\nclass Header extends StatelessWidget {\r\n\r\n  @override\r\n  Widget build(BuildContext context){\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        actions: <Widget>[\r\n          IconButton(\r\n            icon: Icon(Icons.comment),\r\n            onPressed: () {},\r\n          ),\r\n          IconButton(\r\n            icon: Icon(Icons.settings),\r\n            onPressed: () {},\r\n          ),\r\n        ],\r\n        backgroundColor: Colors.black,\r\n      ),\r\n      body: Container()\r\n    );\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- shakluba/lib/Components/header.dart	(revision 7bd72442a9c4ae4aa30b084151a4e68021a6f838)
++++ shakluba/lib/Components/header.dart	(date 1610915241563)
+@@ -19,11 +19,19 @@
+       appBar: AppBar(
+         actions: <Widget>[
+           IconButton(
+-            icon: Icon(Icons.comment),
++            icon: Icon(Icons.comment, color: Color.fromRGBO(169, 255, 178, 1), ),
++            onPressed: () {},
++          ),
++          IconButton(
++            icon: Icon(Icons.settings, color: Color.fromRGBO(169, 255, 178, 1),),
++            onPressed: () {},
++          ),
++          IconButton(
++            icon: Icon(Icons.face, color: Color.fromRGBO(169, 255, 178, 1)),
+             onPressed: () {},
+           ),
+           IconButton(
+-            icon: Icon(Icons.settings),
++            icon: Icon(Icons.save, color: Color.fromRGBO(169, 255, 178, 1)),
+             onPressed: () {},
+           ),
+         ],
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5b7d17e0-8353-4806-9843-03b9875c7b98\" name=\"Default Changelist\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1n8JLi6LrGCyPzRkD3x28GxBcE1\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"dart.analysis.tool.window.force.activate\" value=\"true\" />\r\n    <property name=\"dart.analysis.tool.window.visible\" value=\"false\" />\r\n    <property name=\"io.flutter.reload.alreadyRun\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"project.propVCSSupport.Mappings\" />\r\n    <property name=\"show.migrate.to.gradle.popup\" value=\"false\" />\r\n  </component>\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5b7d17e0-8353-4806-9843-03b9875c7b98\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1610765729562</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1610765729562</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <ignored-roots>\r\n      <path value=\"$PROJECT_DIR$/..\" />\r\n    </ignored-roots>\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"740\" y=\"275\" key=\"FileChooserDialogImpl\" timestamp=\"1610765760476\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"740\" y=\"275\" key=\"FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1610765760476\" />\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.bottom\" timestamp=\"1610766359988\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1610766359988\" />\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.center\" timestamp=\"1610766359988\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1610766359988\" />\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.left\" timestamp=\"1610766359988\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1610766359988\" />\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.right\" timestamp=\"1610766359988\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1877\" height=\"281\" key=\"GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1610766359988\" />\r\n    <state x=\"540\" y=\"263\" key=\"IDE.errors.dialog\" timestamp=\"1610765852600\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"540\" y=\"263\" key=\"IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1610765852600\" />\r\n    <state x=\"461\" y=\"165\" key=\"SettingsEditor\" timestamp=\"1610765847566\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"461\" y=\"165\" key=\"SettingsEditor/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1610765847566\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 7bd72442a9c4ae4aa30b084151a4e68021a6f838)
++++ .idea/workspace.xml	(date 1610915307637)
+@@ -1,7 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5b7d17e0-8353-4806-9843-03b9875c7b98" name="Default Changelist" comment="" />
++    <list default="true" id="5b7d17e0-8353-4806-9843-03b9875c7b98" name="Default Changelist" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/shakluba/lib/Components/header.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shakluba/lib/Components/header.dart" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -23,6 +26,16 @@
+     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+     <property name="show.migrate.to.gradle.popup" value="false" />
++  </component>
++  <component name="RunManager">
++    <configuration default="true" type="FlutterRunConfigurationType" factoryName="Flutter">
++      <option name="filePath" value="$PROJECT_DIR$/shakluba/lib/main.dart" />
++      <method v="2" />
++    </configuration>
++    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
++      <option name="filePath" value="$PROJECT_DIR$/shakluba/lib/main.dart" />
++      <method v="2" />
++    </configuration>
+   </component>
+   <component name="SvnConfiguration">
+     <configuration />
+@@ -43,25 +56,38 @@
+     </ignored-roots>
+   </component>
+   <component name="WindowStateProjectService">
+-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1610765760476">
++    <state x="528" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610859942085">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="528" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610859942085" />
++    <state x="803" y="312" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1610859929461">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
++    <state x="803" y="312" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610859929461" />
++    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1610915219099">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610915219099" />
+     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1610765760476" />
+-    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1610766359988">
++    <state width="1877" height="250" key="GridCell.Tab.0.bottom" timestamp="1610915259586">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
++    <state width="1877" height="250" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610915259586" />
+     <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1610766359988" />
+-    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1610766359988">
++    <state width="1877" height="250" key="GridCell.Tab.0.center" timestamp="1610915259586">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
++    <state width="1877" height="250" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610915259586" />
+     <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1610766359988" />
+-    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1610766359988">
++    <state width="1877" height="250" key="GridCell.Tab.0.left" timestamp="1610915259586">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
++    <state width="1877" height="250" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610915259586" />
+     <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1610766359988" />
+-    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1610766359988">
++    <state width="1877" height="250" key="GridCell.Tab.0.right" timestamp="1610915259586">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
++    <state width="1877" height="250" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610915259586" />
+     <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1610766359988" />
+     <state x="540" y="263" key="IDE.errors.dialog" timestamp="1610765852600">
+       <screen x="0" y="0" width="1920" height="1040" />
+@@ -71,5 +97,9 @@
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1610765847566" />
++    <state x="1058" y="71" width="587" height="888" key="find.popup" timestamp="1610860627309">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="1058" y="71" width="587" height="888" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1610860627309" />
+   </component>
+ </project>
+\ No newline at end of file

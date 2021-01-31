@@ -80,7 +80,6 @@ class _MainCardState extends State<MainCard>{
         }
       });
     }
-    
   }
   
   @override
@@ -149,21 +148,31 @@ class SwipeCard extends StatelessWidget{
       margin: EdgeInsets.symmetric(horizontal: 20),
       collapsed: Container(child: Text("Currently collapsed"), color: Color.fromRGBO(13, 13, 13, 0.5)),      //Gradient should go here
       panel: Container(child: Text("The filters go here"), color: Color.fromRGBO(13, 13, 13, 0.0)),
-      body: CustomScrollView(
-        slivers: <Widget>[ 
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            snap: true,
-            expandedHeight: 500.0,
-            flexibleSpace: FlexibleSpaceBar(
-              collapseMode: CollapseMode.parallax,
-                background: ImageCard(img, 4.6, true),
-            ),
+      body:  Padding(
+            //padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.05, MediaQuery.of(context).size.width * 0.05, MediaQuery.of(context).size.width * 0.05, 0),
+            padding: EdgeInsets.all(10),
+          child: ClipRRect(
+              borderRadius: BorderRadius.only(topLeft:Radius.circular(25),topRight:Radius.circular(25)),
+              child:CustomScrollView(
+              slivers: <Widget>[ 
+                SliverAppBar(
+                  shadowColor: Color.fromARGB(1, 25, 25, 25),
+                  floating: true,
+                  pinned: true,
+                  snap: true,
+                  expandedHeight: 500.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
+                      background: ImageCard(img, 4.6, true),
+                      
+                  ),
+                ),
+                RecipeCard(ing,inst,alt),
+                    //not dynamic as of yet
+              ],
           ),
-          RecipeCard(ing,inst,alt),   //not dynamic as of yet
-        ],
-      )
+        ),
+      ),
     );
   }
 }
@@ -178,7 +187,7 @@ class ImageCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return Stack(
+      return Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Image.asset(img, fit: BoxFit.cover),
@@ -191,7 +200,7 @@ class ImageCard extends StatelessWidget{
             allowHalfRating: true,
           ),
         ],
-      );
+    );
   }
 }
 
